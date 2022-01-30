@@ -20,7 +20,7 @@ You'll probably also want to create some data first.
 Here is how to query data:
 
 ```typescript
-import neo4j from "https://deno.land/x/neo4j_lite_client@4.4.1-preview/mod.ts";
+import neo4j from "https://deno.land/x/neo4j_lite_client@4.4.1-preview2/mod.ts";
 const URI = "bolt://localhost:7687";
 const driver: neo4j.Driver = neo4j.driver(URI, neo4j.auth.basic("neo4j", "driverdemo"));
 const session = driver.session();

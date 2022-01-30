@@ -19,8 +19,8 @@
 
 import ChannelBuffer from './channel-buf.js'
 import { newError } from '../../core/index.ts'
-import buffer from 'https://deno.land/std@0.119.0/node/buffer.ts'
-import { StringDecoder } from 'https://deno.land/std@0.119.0/node/string_decoder.ts'
+import buffer from 'https://deno.land/std@0.120.0/node/buffer.ts'
+import { StringDecoder } from 'https://deno.land/std@0.120.0/node/string_decoder.ts'
 
 const decoder = new StringDecoder('utf8')
 
