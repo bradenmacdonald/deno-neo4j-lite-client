@@ -7,6 +7,10 @@ dependencies swapped for versions from the Deno Standard Library.
 
 This driver has no dependencies other than the Deno standard library.
 
+## Future: Official version
+
+An official Deno driver [is scheduled for version 5 of the upstream driver](https://github.com/neo4j/neo4j-javascript-driver/pull/830#pullrequestreview-846687986).
+
 ## Usage example.
 
 If you want to try this example, first start a Neo4j instance using Docker:
@@ -36,6 +40,3 @@ await driver.close();
 
 This driver was auto-generated. You can see the generation script at
 https://github.com/bradenmacdonald/neo4j-javascript-driver/tree/deno-driver/packages/neo4j-driver-deno
-
-I am discussing this with Neo4j to see if they want to make some or all of it
-official and incorporate it into the upstream repository.
