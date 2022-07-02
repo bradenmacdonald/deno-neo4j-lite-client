@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-import buffer from 'https://deno.land/std@0.120.0/node/buffer.ts'
+import buffer from 'https://deno.land/std@0.146.0/node/buffer.ts'
 import BaseBuffer from '../buf/index.js'
 
 export default class ChannelBuffer extends BaseBuffer {

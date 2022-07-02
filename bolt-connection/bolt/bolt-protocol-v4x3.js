@@ -19,6 +19,7 @@
 import BoltProtocolV42 from './bolt-protocol-v4x2.js'
 import RequestMessage from './request-message.js'
 import { RouteObserver } from './stream-observers.js'
+import { LoginObserver } from './stream-observers.js'
 
 import { internal } from '../../core/index.ts'
 
@@ -64,5 +65,50 @@ export default class BoltProtocol extends BoltProtocolV42 {
     )
 
     return observer
+  }
+
+  /**
+   * Initialize a connection with the server
+   *
+   * @param {Object} param0 The params
+   * @param {string} param0.userAgent The user agent
+   * @param {any} param0.authToken The auth token
+   * @param {function(error)} param0.onError On error callback
+   * @param {function(onComplte)} param0.onComplete On complete callback
+   * @returns {LoginObserver} The Login observer
+   */
+   initialize ({ userAgent, authToken, onError, onComplete } = {}) {
+    const observer = new LoginObserver({
+      onError: error => this._onLoginError(error, onError),
+      onCompleted: metadata => {
+        if (metadata.patch_bolt !== undefined) {
+          this._applyPatches(metadata.patch_bolt)
+        }
+        return this._onLoginCompleted(metadata, onComplete)
+      }
+    })
+
+    this.write(
+      RequestMessage.hello(userAgent, authToken, this._serversideRouting, ['utc']),
+      observer,
+      true
+    )
+
+    return observer
+  }
+
+  /**
+   *
+   * @param {string[]} patches Patches to be applied to the protocol
+   */
+  _applyPatches (patches) {
+    if (patches.includes('utc')) {
+      this._applyUtcPatch()
+    }
+  }
+
+  _applyUtcPatch () {
+    this._packer.useUtc = true
+    this._unpacker.useUtc = true
   }
 }

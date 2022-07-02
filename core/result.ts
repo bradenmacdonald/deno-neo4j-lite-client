@@ -118,6 +118,8 @@ class Result implements Promise<QueryResult> {
     this._connectionHolder = connectionHolder || EMPTY_CONNECTION_HOLDER
   }
 
+  get [Symbol.toStringTag]() { return "Result"; }
+
   /**
    * Returns a promise for the field keys.
    *
@@ -232,7 +234,6 @@ class Result implements Promise<QueryResult> {
    * @param {function()|null} onfinally - function when the promise finished
    * @return {Promise} promise.
    */
-  [Symbol.toStringTag]: string
   finally(onfinally?: (() => void) | null): Promise<QueryResult> {
     return this._getOrCreatePromise().finally(onfinally)
   }
